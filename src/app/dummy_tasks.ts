@@ -61,11 +61,27 @@ const dummyTasks = [
   },
   {
     id: 't9',
-    userId: 'u3',
+    userId: 'u6',
     title: 'Deploy to production',
     summary:
       'Deploy the Angular application to the production environment and ensure everything works as expected.',
     dueDate: '2024-12-01',
+  },
+  {
+    id: 't10',
+    userId: 'u5',
+    title: 'Gather user feedback',
+    summary:
+      'Gather user feedback on the new features and improvements made in the Angular application.',
+    dueDate: '2025-01-15',
+  },
+  {
+    id: 't11',
+    userId: 'u4',
+    title: 'Conduct user interviews',
+    summary:
+      'Conduct user interviews to gather insights and feedback on the application.',
+    dueDate: '2025-02-28',
   },
 ];
 
