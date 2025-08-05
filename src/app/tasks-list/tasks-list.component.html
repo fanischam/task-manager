@@ -1,0 +1,21 @@
+<div>
+  <h1>Tasks List</h1>
+  @if(isUserSelected()) {
+
+  <ul>
+    @for (task of tasks(); track $index) {
+    <li>
+      <h2>{{ task.title }}</h2>
+      <br />
+      <span>{{ task.summary }}</span>
+      <br />
+      <span>{{ task.dueDate }}</span>
+    </li>
+    } @empty {
+    <li>No tasks found.</li>
+    }
+  </ul>
+  } @else {
+  <p>Please select a user to view their tasks.</p>
+  }
+</div>
