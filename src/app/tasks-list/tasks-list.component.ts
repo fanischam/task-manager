@@ -1,15 +1,20 @@
 import { Component, input } from '@angular/core';
-import { Task } from '../../types';
+import { Task } from '../task/task.model';
+import { User } from '../user/user.model';
+import dummyTasks from '../dummy_tasks';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-tasks-list',
   standalone: true,
-  imports: [],
+  imports: [TaskComponent],
   templateUrl: './tasks-list.component.html',
   styleUrl: './tasks-list.component.css',
 })
 export class TasksListComponent {
-  tasks = input.required<Array<Task>>();
+  selectedUser = input<User>();
 
-  isUserSelected = input.required<boolean>();
+  get selectedUserTasks(): Task[] {
+    return dummyTasks.filter((task) => task.userId === this.selectedUser()?.id);
+  }
 }

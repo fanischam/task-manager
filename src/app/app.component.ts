@@ -3,7 +3,7 @@ import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
 import { DUMMY_USERS } from './dummy_users';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
-import dummyTasks from './dummy_tasks';
+import { User } from './user/user.model';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +14,14 @@ import dummyTasks from './dummy_tasks';
 })
 export class AppComponent {
   users = DUMMY_USERS;
-  tasks = dummyTasks;
-  isUserSelected = false;
+  selectedUserId?: string;
 
   onSelectUser(id: string) {
-    this.isUserSelected = true;
-    this.tasks = dummyTasks.filter((task) => task.userId === id);
+    console.log('Selected user ID:', id);
+    this.selectedUserId = id;
+  }
+
+  get selectedUser(): User | undefined {
+    return this.users.find((user) => user.id === this.selectedUserId);
   }
 }
