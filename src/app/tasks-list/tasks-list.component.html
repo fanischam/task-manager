@@ -1,9 +1,16 @@
+@if(isAddingTask) {
+<app-new-task
+  (cancel)="onCancelTaskCreation()"
+  (create)="onCreateTask($event)"
+/>
+}
+
 <section id="tasks">
   @if(selectedUser()) {
   <header>
     <h2>{{ selectedUser()?.name }}'s tasks list</h2>
     <menu>
-      <button>Add Task</button>
+      <button (click)="onAddTask()">Add Task</button>
     </menu>
   </header>
   <ul>
