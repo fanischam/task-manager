@@ -4,6 +4,7 @@ import { User } from '../../user/user.model';
 import dummyTasks from '../../dummy_tasks';
 import { TaskComponent } from '../task/task.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-tasks-list',
@@ -17,12 +18,10 @@ export class TasksListComponent {
   tasks = dummyTasks;
   isAddingTask = false;
 
-  get selectedUserTasks(): Task[] {
-    return this.tasks.filter((task) => task.userId === this.selectedUser()?.id);
-  }
+  constructor(private taskService: TaskService) {}
 
-  onCompleteTask(taskId: string) {
-    this.tasks = this.tasks.filter((task) => task.id !== taskId);
+  get selectedUserTasks(): Task[] {
+    return this.taskService.getUserTasks(this.selectedUser()?.id || '');
   }
 
   onAddTask() {
@@ -31,21 +30,8 @@ export class TasksListComponent {
     console.log('Add Task button clicked');
   }
 
-  onCancelTaskCreation() {
+  onCloseTaskModal() {
     this.isAddingTask = false;
     console.log('Task creation cancelled');
-  }
-
-  onCreateTask(newTask: Partial<Task>) {
-    this.tasks.push({
-      id: Math.random().toString(),
-      title: newTask.title || '',
-      summary: newTask.summary || '',
-      dueDate: newTask.dueDate || '',
-      userId: this.selectedUser()!.id,
-    });
-
-    this.isAddingTask = false;
-    console.log('New task created:', newTask);
   }
 }

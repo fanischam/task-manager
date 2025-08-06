@@ -1,6 +1,7 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { Task } from '../task/task.model';
 import { FormsModule } from '@angular/forms';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-new-task',
@@ -10,15 +11,16 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './new-task.component.css',
 })
 export class NewTaskComponent {
-  cancel = output<void>();
-  create = output<Partial<Task>>();
+  constructor(private taskService: TaskService) {}
+  userId = input.required<string>();
+  close = output<void>();
 
   enteredTitle = signal('');
   enteredSummary = signal('');
   enteredDueDate = signal('');
 
   onCancel() {
-    this.cancel.emit();
+    this.close.emit();
     console.log('New task creation cancelled');
   }
 
@@ -28,7 +30,8 @@ export class NewTaskComponent {
       summary: this.enteredSummary(),
       dueDate: this.enteredDueDate(),
     };
-    this.create.emit(task);
+    this.taskService.createTask(task, this.userId());
+    this.close.emit();
     console.log('New task created:', task);
   }
 }
