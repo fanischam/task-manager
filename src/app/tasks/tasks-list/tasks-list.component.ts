@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { Task } from '../task/task.model';
-import { User } from '../user/user.model';
-import dummyTasks from '../dummy_tasks';
+import { User } from '../../user/user.model';
+import dummyTasks from '../../dummy_tasks';
 import { TaskComponent } from '../task/task.component';
 import { NewTaskComponent } from '../new-task/new-task.component';
 
